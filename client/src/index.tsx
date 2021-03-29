@@ -6,22 +6,10 @@ import reportWebVitals from "./reportWebVitals";
 import { createStore, combineReducers } from "redux";
 import { Provider } from "react-redux";
 import { composeWithDevTools } from "redux-devtools-extension";
+import {rootReducer} from "./reducers"
 
-// {type: "LIG_IN_USER", payload: {name: "Ninomiya", role: "Seller"}}
-const authReducer = (state = {}, action:any) => {
-  switch (action.type) {
-    case "LOG_IN_USER":
-      return { ...state, ...action.payload };
-    case "LOGOUT":
-      return action.payload;
-    default:
-      return state;
-  }
-};
 
-const rootReducer = combineReducers({
-  user: authReducer,
-});
+
 
 const store = createStore(rootReducer, composeWithDevTools());
 
