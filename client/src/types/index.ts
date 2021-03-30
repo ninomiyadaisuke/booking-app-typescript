@@ -9,3 +9,9 @@ export type formProps = {
   setPassword: React.Dispatch<React.SetStateAction<string>>
   handleSubmit: (e: React.FormEvent) => void
 }
+
+export type createUser = {
+  name: string
+  email: string
+  password: string
+}
