@@ -34,7 +34,7 @@ const RegisterForm: React.FC<formProps> = ({
     <div className="form-group mb-3">
       <label className="form-label">Password</label>
       <input
-        type="text"
+        type="password"
         className="form-control"
         placeholder="Enter password"
         value={password}
