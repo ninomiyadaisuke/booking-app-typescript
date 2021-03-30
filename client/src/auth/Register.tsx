@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { RegisterForm } from "../components";
 
 const Register: React.FC = () => {
   const [name, setName] = useState<string>("");
@@ -10,41 +11,9 @@ const Register: React.FC = () => {
     console.table({ name, email, password });
   };
 
-  const registerForm = () => (
-    <form onSubmit={handleSubmit} className="mt-3">
-      <div className="form-group">
-        <label className="form-label mb-3">Your name</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Enter name"
-          value={name}
-          onChange={(e) => setName(e.target.value)}
-        />
-      </div>
-      <div className="form-group mb-3">
-        <label className="form-label">Email address</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Enter email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-        />
-      </div>
-      <div className="form-group mb-3">
-        <label className="form-label">Password</label>
-        <input
-          type="text"
-          className="form-control"
-          placeholder="Enter password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-        />
-      </div>
-      <button className="btn btn-primary">Submit</button>
-    </form>
-  );
+  // const registerForm = () => (
+
+  // );
 
   return (
     <>
@@ -53,7 +22,17 @@ const Register: React.FC = () => {
       </div>
       <div className="container">
         <div className="row">
-          <div className="col-md-6 offset-md-3">{registerForm()}</div>
+          <div className="col-md-6 offset-md-3">
+            <RegisterForm
+              name={name}
+              setName={setName}
+              email={email}
+              setEmail={setEmail}
+              password={password}
+              setPassword={setPassword}
+              handleSubmit={handleSubmit}
+            />
+          </div>
         </div>
       </div>
     </>
