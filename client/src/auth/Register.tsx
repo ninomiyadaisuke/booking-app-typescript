@@ -1,8 +1,11 @@
 import React, { useState } from "react";
 import { RegisterForm } from "../components";
 import axios from "axios";
+import { toast } from "react-toastify";
+import {useHistory} from "react-router-dom"
 
 const Register: React.FC = () => {
+  const history = useHistory()
   const [name, setName] = useState<string>("");
   const [email, setEmail] = useState<string>("");
   const [password, setPassword] = useState<string>("");
@@ -17,11 +20,14 @@ const Register: React.FC = () => {
         password,
       });
       console.log("REGISTER USER ===> ", res);
+      toast.success("Register success. Pleage login.");
+      history.push("/login")
       setName("");
       setEmail("");
       setPassword("");
     } catch (err) {
       console.log(err);
+      if (err.response.status === 400) toast.error(err.response.data);
     }
   };
 
@@ -30,6 +36,7 @@ const Register: React.FC = () => {
       <div className="container-fluid bg-secondary p-5 text-center">
         <h1>Register</h1>
       </div>
+
       <div className="container">
         <div className="row">
           <div className="col-md-6 offset-md-3">
