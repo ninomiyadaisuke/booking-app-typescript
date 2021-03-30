@@ -21,9 +21,6 @@ const Register: React.FC = () => {
       console.log("REGISTER USER ===> ", res);
       toast.success("Register success. Pleage login.");
       history.push("/login");
-      setName("");
-      setEmail("");
-      setPassword("");
     } catch (err) {
       console.log(err);
       if (err.response.status === 400) toast.error(err.response.data);
