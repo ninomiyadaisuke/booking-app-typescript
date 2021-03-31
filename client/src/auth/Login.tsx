@@ -26,13 +26,13 @@ const Login: React.FC = () => {
         //save user and token to local storage
         window.localStorage.setItem("auth", JSON.stringify(res.data));
         //save user and token to redux
-        console.log(res.data);
+        // console.log(res.data);
 
         dispatch({
           type: "LOGGED_IN_USER",
           payload: res.data,
         });
-        history.push("/");
+        history.push("/dashboard");
       }
     } catch (err) {
       console.log(err);
