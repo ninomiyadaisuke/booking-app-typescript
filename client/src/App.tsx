@@ -10,6 +10,7 @@ import { Home } from "./booking";
 import { Login } from "./auth";
 import { Register } from "./auth";
 import { Dashboard, DashboardSeller } from "./user";
+import { NewHotel } from "./hotels";
 
 
 const App: React.FC = () => {
@@ -23,6 +24,7 @@ const App: React.FC = () => {
         <Route exact path="/register" component={Register} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
         <PrivateRoute exact path="/dashboard/seller" component={DashboardSeller} />
+        <PrivateRoute exact path="/hotels/new" component={NewHotel} />
       </Switch>
     </BrowserRouter>
   );
