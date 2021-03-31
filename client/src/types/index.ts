@@ -29,3 +29,18 @@ export type loginUser = {
   email:string
   password:string
 }
+
+type users = {
+  token:string
+  user:{
+    email:string
+    name:string
+    updatedAt:string
+    _id:string
+  }
+}
+
+export type userPayload = {
+  type: string
+  payload: users
+}
