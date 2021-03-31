@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-const DashboardNav = () => {
+const DashboardNav:React.FC = () => {
   const active = window.location.pathname;
   // console.log(active);
 
