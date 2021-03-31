@@ -55,15 +55,10 @@ export type userAuth = {
   }
 }
 
-// export type userAuth = {
-//   auth: (state: string | null | undefined, action: userPayload) => string | {
-//     token: string;
-//     user: {
-//       email: string;
-//       name: string;
-//       updatedAt: string;
-//       _id: string;
-//     };
-//   } | null|unknown
-// }
+export type authRoute = {
+  exact: boolean
+  path: string
+  component: React.FC
+}
+
 
