@@ -9,13 +9,8 @@ import { TopNav, PrivateRoute } from "./components";
 import { Home } from "./booking";
 import { Login } from "./auth";
 import { Register } from "./auth";
-import { Dashboard } from "./user";
+import { Dashboard, DashboardSeller } from "./user";
 
-type test = {
-  exact:boolean
-  path:string
-  component:React.FC
-}
 
 const App: React.FC = () => {
   return (
@@ -27,6 +22,7 @@ const App: React.FC = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
+        <PrivateRoute exact path="/dashboard/seller" component={DashboardSeller} />
       </Switch>
     </BrowserRouter>
   );
