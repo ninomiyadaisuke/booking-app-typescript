@@ -40,6 +40,7 @@ export type userPayload = {
       updatedAt: string
       _id: string
     }
+    stripe_account_id: string
   }
 }
 

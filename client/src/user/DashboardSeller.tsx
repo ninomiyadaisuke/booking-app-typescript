@@ -4,10 +4,12 @@ import { ConnectNav } from "../components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userAuth } from "../types";
+import { HomeOutlined } from "@ant-design/icons";
 
 const DashboardSeller: React.FC = () => {
   const selector = useSelector((state: userAuth) => ({ ...state }));
   const auth = selector.auth;
+  const test:string = "test"
 
   const connected = () => (
     <div className="container-fluid">
@@ -27,8 +29,21 @@ const DashboardSeller: React.FC = () => {
   const notConnected = () => (
     <div className="container-fluid">
       <div className="row">
-        <div className="col-md-10">
-          <h2>Connect with stripe</h2>
+        <div className="col-md-6 offset-md-3 text-center">
+          <div className="p-5 pointer">
+            <HomeOutlined className="h1" />
+            <h2>Setup payouts to post hotel rooms</h2>
+            <p className="lead">
+              MERN partners with stripe to transfer earnings to your bank
+              account
+            </p>
+            <button className="btn btn-primary mb-3">
+              Setup Payouts
+            </button>
+            <p className="text-muted">
+              You will be redirected to Stripe to complete the onboarding process.
+            </p>
+          </div>
         </div>
       </div>
     </div>
@@ -42,7 +57,7 @@ const DashboardSeller: React.FC = () => {
       <div className="conatainer p-4">
         <DashboardNav />
       </div>
-      {auth && auth.user ? connected() : notConnected()}
+      {auth && auth.user && !test ? connected() : notConnected()}
       {/* <pre>{JSON.stringify(auth,null,4)}</pre> */}
     </>
   );
