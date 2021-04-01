@@ -1,15 +1,30 @@
-import React from "react";
+import React, { useState } from "react";
 import { DashboardNav } from "../components";
 import { ConnectNav } from "../components";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { userAuth } from "../types";
 import { HomeOutlined } from "@ant-design/icons";
+import { createConnectAccount } from "../actions/stripe";
+import { toast } from "react-toastify";
 
 const DashboardSeller: React.FC = () => {
+  const [loading, setLoading] = useState(false);
   const selector = useSelector((state: userAuth) => ({ ...state }));
   const auth = selector.auth;
-  const test:string = "test"
+  const test: string = "test";
+
+  const handleClick = async () => {
+    setLoading(true);
+    try {
+      let res = await createConnectAccount(auth.token);
+      console.log(res);
+    } catch (err) {
+      console.log(err);
+      toast.error("Stripe connect failed, Try again.");
+      setLoading(false);
+    }
+  };
 
   const connected = () => (
     <div className="container-fluid">
@@ -37,11 +52,16 @@ const DashboardSeller: React.FC = () => {
               MERN partners with stripe to transfer earnings to your bank
               account
             </p>
-            <button className="btn btn-primary mb-3">
-              Setup Payouts
+            <button
+              disabled={loading}
+              onClick={handleClick}
+              className="btn btn-primary mb-3"
+            >
+              {loading ? "Processing..." : "Setup Payouts"}
             </button>
             <p className="text-muted">
-              You will be redirected to Stripe to complete the onboarding process.
+              You will be redirected to Stripe to complete the onboarding
+              process.
             </p>
           </div>
         </div>

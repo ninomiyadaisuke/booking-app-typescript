@@ -62,4 +62,6 @@ export type authRoute = {
   component: React.FC
 }
 
-
+export type clientToSeverToken = {
+  token:string
+}
