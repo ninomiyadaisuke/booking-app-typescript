@@ -27,11 +27,24 @@ export const createConnectAccount = async (req, res) => {
   accountLink = Object.assign(accountLink, {
     "stripe_user[email]": user.email || undefined,
   });
-  console.log("URL===>",accountLink.url);
+  console.log("URL===>", accountLink.url);
   let link = `${accountLink.url}?${queryString.stringify(accountLink)}`;
   console.log("LIGIN LINK", link);
   res.send(link);
   //  console.log("ACCOUNT LINK", accountLink);
+};
+
+const updateDlayDays = async (accountId) => {
+  const account = await stripe.accounts.update(accountId, {
+    settings: {
+      payouts: {
+        schedule:{
+          delay_days:7,
+        }
+      },
+    },
+  });
+  return account
 };
 
 export const getAccountStatus = async (req, res) => {
@@ -39,13 +52,17 @@ export const getAccountStatus = async (req, res) => {
   const user = await User.findById(req.user._id).exec();
   const account = await stripe.accounts.retrieve(user.stripe_account_id);
   // console.log("USER ACCOUNT RETRIEVE", account );
+  // update delay days
+  const updatedAccount = await updateDlayDays(account.id)
   const updatedUser = await User.findByIdAndUpdate(
     user._id,
     {
-      stripe_seller: account,
+      stripe_seller: updatedAccount,
     },
     { new: true }
-  ).select("-password").exec();
+  )
+    .select("-password")
+    .exec();
   // console.log(updatedUser);
-  res.json(updatedUser)
+  res.json(updatedUser);
 };
