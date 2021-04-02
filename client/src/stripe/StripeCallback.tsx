@@ -4,6 +4,7 @@ import { useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { userAuth } from "../types";
 import { getAccountStatus } from "../actions/stripe";
+import { updateUserInLocalStorage } from "../actions/auth";
 
 const StripeCallback: React.FC = () => {
   const history = useHistory();
@@ -18,8 +19,17 @@ const StripeCallback: React.FC = () => {
   const accountStatus = async () => {
     try {
       const res = await getAccountStatus(auth.token);
-      console.log("user account status on stripe callback", res);
-      
+      // console.log("user account status on stripe callback", res);
+      // update user in local storage
+      updateUserInLocalStorage(res.data, () => {
+        //update user in redux
+          dispatch({
+            type: "LOGGED_IN_USER",
+            payload: res.data,
+          })
+          // redirect user dashboard
+          window.location.href = "/dashboard/seller"
+      })
     } catch (err) {
       console.log(err);
     }

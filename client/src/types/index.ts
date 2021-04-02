@@ -52,8 +52,17 @@ export type userAuth = {
       name: string
       updatedAt: string
       _id: string
+      stripe_seller?: {
+        charges_enabled?: boolean
+      }
     }
   }
+}
+
+
+
+export type StripeUserAuth = {
+
 }
 
 export type authRoute = {
@@ -63,5 +72,5 @@ export type authRoute = {
 }
 
 export type clientToSeverToken = {
-  token:string
+  token: string
 }

@@ -19,12 +19,15 @@ const ConnectNav: React.FC = () => {
           description={`Joined ${moment(user.updatedAt).fromNow()}`}
         />
       </Card>
-      {auth && auth.user && (
-        <>
-          <div>Pending balance</div>
-          <div>Payout settings</div>
-        </>
-      )}
+      {auth &&
+        auth.user &&
+        auth.user.stripe_seller &&
+        auth.user.stripe_seller.charges_enabled && (
+          <>
+            <div>Pending balance</div>
+            <div>Payout settings</div>
+          </>
+        )}
     </div>
   );
 };
