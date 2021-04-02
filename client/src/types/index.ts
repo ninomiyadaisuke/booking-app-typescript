@@ -75,21 +75,15 @@ export type clientToSeverToken = {
   token: string
 }
 
+export type bPending = {
+  amount: number;
+  currency: string;
+  source_types: {
+    card: number;
+  };
+}
 
 
-// config: {url: "http://localhost:8000/api/get-account-status", method: "post", data: "{}", headers: {…}, transformRequest: Array(1), …}
-// data:
-// createdAt: "2021-03-30T07:18:40.451Z"
-// email: "test@test.com"
-// name: "二ノ宮大翼"
-// stripe_account_id: "acct_1IbKTe2YHu2nT9Ow"
-// stripe_seller: {id: "acct_1IbKTe2YHu2nT9Ow", object: "account", business_profile: {…}, charges_enabled: false, country: "JP", …}
-// updatedAt: "2021-04-02T04:33:50.993Z"
-// __v: 0
-// _id: "6062d0d005d8776266008ad9"
-// __proto__: Object
-// headers: {content-length: "1807", content-type: "application/json; charset=utf-8"}
-// request: XMLHttpRequest {readyState: 4, timeout: 0, withCredentials: false, upload: XMLHttpRequestUpload, onreadystatechange: ƒ, …}
-// status: 200
-// statusText: "OK"
-// __proto__: Object
+export type balance = {
+  pending: [bPending];
+}

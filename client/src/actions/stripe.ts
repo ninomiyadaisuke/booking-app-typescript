@@ -1,4 +1,5 @@
 import axios from "axios"
+import {bPending} from "../types"
 
 export const createConnectAccount = async (token: string) => await axios.post(`${process.env.REACT_APP_API}/create-connect-account`, {},
   {
@@ -18,5 +19,13 @@ export const getAccountBalance = async (token: string) => axios.post(`${process.
     Authorization: `Bearer ${token}`,
   },
 })
+
+
+export const currencyFormatter = (data:bPending) => {
+  return (data.amount / 100).toLocaleString(data.currency, {
+    style: "currency",
+    currency: data.currency,
+  })
+}
 
 
