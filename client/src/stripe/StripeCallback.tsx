@@ -19,7 +19,8 @@ const StripeCallback: React.FC = () => {
   const accountStatus = async () => {
     try {
       const res = await getAccountStatus(auth.token);
-      // console.log("user account status on stripe callback", res);
+      console.log(res.data);
+      localStorage.setItem("test",res.data)
       // update user in local storage
       updateUserInLocalStorage(res.data, () => {
         //update user in redux
@@ -28,6 +29,7 @@ const StripeCallback: React.FC = () => {
             payload: res.data,
           })
           // redirect user dashboard
+          // history.push("/dashboard/seller")
           window.location.href = "/dashboard/seller"
       })
     } catch (err) {

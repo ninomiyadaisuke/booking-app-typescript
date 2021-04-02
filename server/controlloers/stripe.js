@@ -27,6 +27,7 @@ export const createConnectAccount = async (req, res) => {
   accountLink = Object.assign(accountLink, {
     "stripe_user[email]": user.email || undefined,
   });
+  console.log("URL===>",accountLink.url);
   let link = `${accountLink.url}?${queryString.stringify(accountLink)}`;
   console.log("LIGIN LINK", link);
   res.send(link);
