@@ -11,7 +11,7 @@ import { Login } from "./auth";
 import { Register } from "./auth";
 import { Dashboard, DashboardSeller } from "./user";
 import { NewHotel } from "./hotels";
-
+import { StripeCallback } from "./stripe";
 
 const App: React.FC = () => {
   return (
@@ -23,8 +23,13 @@ const App: React.FC = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Register} />
         <PrivateRoute exact path="/dashboard" component={Dashboard} />
-        <PrivateRoute exact path="/dashboard/seller" component={DashboardSeller} />
+        <PrivateRoute
+          exact
+          path="/dashboard/seller"
+          component={DashboardSeller}
+        />
         <PrivateRoute exact path="/hotels/new" component={NewHotel} />
+        <PrivateRoute exact path="/stripe/callback" component={StripeCallback} />
       </Switch>
     </BrowserRouter>
   );
