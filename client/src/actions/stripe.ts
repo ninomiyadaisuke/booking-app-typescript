@@ -29,3 +29,9 @@ export const currencyFormatter = (data:bPending) => {
 }
 
 
+export const payoutSetting = async (token:string) => await axios.post(`${process.env.REACT_APP_API}/payout-setting`,{}, {
+  headers:{
+    Authorization: `Bearer ${token}`
+  }
+})
+
