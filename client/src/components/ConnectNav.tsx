@@ -32,7 +32,8 @@ const ConnectNav: React.FC = () => {
     setLoading(true)
     try {
       const res = await payoutSetting(auth.token)
-      console.log("RES FOR PAYOUT SETTING LINK",res);
+      //console.log("RES FOR PAYOUT SETTING LINK",res);
+      window.location.href = res.data.url
       setLoading(false)
     }catch (err) {
       console.log(err);
