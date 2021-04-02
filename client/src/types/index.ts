@@ -40,6 +40,7 @@ export type userPayload = {
       updatedAt: string
       _id: string
     }
+    stripe_account_id: string
   }
 }
 
@@ -61,4 +62,6 @@ export type authRoute = {
   component: React.FC
 }
 
-
+export type clientToSeverToken = {
+  token:string
+}
