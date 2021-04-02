@@ -4,9 +4,14 @@ const router = express.Router();
 
 import { requireSignin } from "../middlewares";
 
-import { createConnectAccount, getAccountStatus } from "../controlloers/stripe";
+import {
+  createConnectAccount,
+  getAccountStatus,
+  getAccountBalance,
+} from "../controlloers/stripe";
 
 router.post("/create-connect-account", requireSignin, createConnectAccount);
 router.post("/get-account-status", requireSignin, getAccountStatus);
+router.post("/get-account-balance", requireSignin, getAccountBalance);
 
 module.exports = router;

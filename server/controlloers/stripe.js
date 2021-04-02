@@ -38,13 +38,13 @@ const updateDlayDays = async (accountId) => {
   const account = await stripe.accounts.update(accountId, {
     settings: {
       payouts: {
-        schedule:{
-          delay_days:7,
-        }
+        schedule: {
+          delay_days: 7,
+        },
       },
     },
   });
-  return account
+  return account;
 };
 
 export const getAccountStatus = async (req, res) => {
@@ -53,7 +53,7 @@ export const getAccountStatus = async (req, res) => {
   const account = await stripe.accounts.retrieve(user.stripe_account_id);
   // console.log("USER ACCOUNT RETRIEVE", account );
   // update delay days
-  const updatedAccount = await updateDlayDays(account.id)
+  const updatedAccount = await updateDlayDays(account.id);
   const updatedUser = await User.findByIdAndUpdate(
     user._id,
     {
@@ -65,4 +65,18 @@ export const getAccountStatus = async (req, res) => {
     .exec();
   // console.log(updatedUser);
   res.json(updatedUser);
+};
+
+export const getAccountBalance = async (req, res) => {
+  const user = await User.findById(req.user._id).exec();
+
+  try {
+    const balance = await stripe.balance.retrieve({
+      stripeAccount: user.stripe_account_id,
+    });
+    console.log("BLANCE===>", balance);
+    res.json(balance)
+  } catch (err) {
+    console.log(err);
+  }
 };
