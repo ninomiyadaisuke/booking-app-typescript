@@ -12,3 +12,11 @@ export const getAccountStatus = async (token: string) => axios.post(`${process.e
     Authorization: `Bearer ${token}`,
   },
 })
+
+export const getAccountBalance = async (token: string) => axios.post(`${process.env.REACT_APP_API}/get-account-balance`, {}, {
+  headers: {
+    Authorization: `Bearer ${token}`,
+  },
+})
+
+
