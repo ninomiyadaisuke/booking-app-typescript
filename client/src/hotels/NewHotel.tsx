@@ -1,9 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-// const AlgokiaPlaces = require("algolia-places-react");
+import { hotelRegistration } from "../types";
+const AlgokiaPlaces = require("algolia-places-react");
 
 const NewHotel: React.FC = () => {
-  const [values, setValues] = useState({
+  const [values, setValues] = useState<hotelRegistration>({
     //state
     title: "",
     content: "",
@@ -14,6 +15,10 @@ const NewHotel: React.FC = () => {
     to: "",
     bed: "",
   });
+
+  const [preview, setPreview] = useState(
+    "https://via.placeholder.com/100x100.png?text=PREVIEW"
+  );
   // destructuring variables from state
   const { title, content, location, image, price, from, to, bed } = values;
 
@@ -21,9 +26,17 @@ const NewHotel: React.FC = () => {
     //
   };
 
-  const handleImageChange = (e: React.ChangeEvent) => {};
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files![0];
+    setPreview(URL.createObjectURL(file));
+    setValues({ ...values, image: file });
+  };
 
-  const handleChange = (e: React.ChangeEvent) => {};
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setValues({ ...values, [e.target.name]: e.target.value });
+  };
 
   return (
     <>
@@ -56,7 +69,7 @@ const NewHotel: React.FC = () => {
                 />
                 <textarea
                   name="content"
-                  onChange={handleImageChange}
+                  onChange={handleChange}
                   placeholder="Title"
                   className="form-control m-2"
                   value={content}
@@ -79,12 +92,17 @@ const NewHotel: React.FC = () => {
                   className="form-control m-2"
                 />
               </div>
-              <button className="btn btn-outline-primary m-2">
-                Save
-              </button>
+              <button className="btn btn-outline-primary m-2">Save</button>
             </form>
           </div>
-          <div className="col-md-2">Image <pre>{JSON.stringify(values, null, 4)}</pre></div>
+          <div className="col-md-2">
+            <img
+              src={preview}
+              alt="preview_image"
+              className="img img-fluid m-2"
+            />
+            <pre>{JSON.stringify(values, null, 4)}</pre>
+          </div>
         </div>
       </div>
     </>

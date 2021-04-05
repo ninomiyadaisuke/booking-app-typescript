@@ -59,12 +59,6 @@ export type userAuth = {
   }
 }
 
-
-
-export type StripeUserAuth = {
-
-}
-
 export type authRoute = {
   exact: boolean
   path: string
@@ -87,3 +81,14 @@ export type bPending = {
 export type balance = {
   pending: [bPending];
 }
+
+export type hotelRegistration = {
+  title: string;
+  content: string;
+  location: string;
+  image?: File | null|string;
+  price: string;
+  from: string;
+  to: string;
+  bed: string;
+};
