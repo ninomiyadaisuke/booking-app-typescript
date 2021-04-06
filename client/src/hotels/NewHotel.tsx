@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { toast } from "react-toastify";
-import { hotelRegistration } from "../types";
+import { hotelRegistration, locationValue } from "../types";
 import AlgoliaPlaces from "algolia-places-react";
 import { DatePicker, Select } from "antd";
 import moment from "moment";
+import { createHotel } from "../actions/hotel";
 
 const Option = Select;
 
@@ -12,7 +13,6 @@ const NewHotel: React.FC = () => {
     //state
     title: "",
     content: "",
-    location: "",
     image: "",
     price: "",
     from: "",
@@ -20,20 +20,17 @@ const NewHotel: React.FC = () => {
     bed: "",
   });
 
-  type locationValue = {
-    suggestion: {
-      value: string;
-    };
-  };
-
   const [preview, setPreview] = useState(
     "https://via.placeholder.com/100x100.png?text=PREVIEW"
   );
+  const [location, setLocation] = useState("");
   // destructuring variables from state
-  const { title, content, location, image, price, from, to, bed } = values;
+  const { title, content, image, price, from, to, bed } = values;
 
   const handleSubmit = (e: React.FormEvent) => {
-    //
+    e.preventDefault();
+    console.log(values);
+    console.log(location);
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -90,7 +87,7 @@ const NewHotel: React.FC = () => {
                   defaultValue={location}
                   // // options={config}
                   onChange={({ suggestion }: locationValue) =>
-                    setValues({ ...values, location: suggestion.value })
+                    setLocation(suggestion.value)
                   }
                   style={{ height: "50px" }}
                 />
@@ -105,7 +102,7 @@ const NewHotel: React.FC = () => {
                 />
 
                 <Select
-                  onChange={(value: string) => 
+                  onChange={(value: string) =>
                     setValues({ ...values, bed: value })
                   }
                   className="w-100 m-2"
@@ -158,6 +155,7 @@ const NewHotel: React.FC = () => {
               className="img img-fluid m-2"
             />
             <pre>{JSON.stringify(values, null, 4)}</pre>
+            {JSON.stringify(location)}
           </div>
         </div>
       </div>

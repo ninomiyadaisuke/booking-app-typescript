@@ -85,7 +85,6 @@ export type balance = {
 export type hotelRegistration = {
   title: string;
   content: string;
-  location: string;
   image?: File | null|string;
   price: string;
   from: string;
@@ -93,3 +92,8 @@ export type hotelRegistration = {
   bed: string;
 };
 
+export type locationValue = {
+  suggestion: {
+    value: string;
+  };
+};
