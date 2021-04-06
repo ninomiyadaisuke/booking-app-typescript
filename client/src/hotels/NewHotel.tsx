@@ -2,14 +2,8 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { hotelRegistration } from "../types";
 import AlgoliaPlaces from "algolia-places-react";
-//const AlgokiaPlaces = require("algolia-places-react");
-
-const config = {
-  appId: process.env.REACT_APP_ALGOLIA_APP_ID,
-  apiKey: process.env.REACT_APP_ALGOLIA_API_KEY,
-  language: "ja",
-  counties: ["ja"],
-};
+import { DatePicker } from "antd";
+import moment from "moment";
 
 const NewHotel: React.FC = () => {
   const [values, setValues] = useState<hotelRegistration>({
@@ -24,12 +18,11 @@ const NewHotel: React.FC = () => {
     bed: "",
   });
 
-type locationValue = {
-  suggestion:{
-    value:string
-  }
-}
-  
+  type locationValue = {
+    suggestion: {
+      value: string;
+    };
+  };
 
   const [preview, setPreview] = useState(
     "https://via.placeholder.com/100x100.png?text=PREVIEW"
@@ -94,13 +87,12 @@ type locationValue = {
                   placeholder="Location"
                   defaultValue={location}
                   // // options={config}
-                  onChange={({ suggestion }:locationValue) =>
+                  onChange={({ suggestion }: locationValue) =>
                     setValues({ ...values, location: suggestion.value })
                   }
                   style={{ height: "50px" }}
                 />
-                
-                
+
                 <input
                   type="number"
                   name="price"
@@ -118,6 +110,27 @@ type locationValue = {
                   className="form-control m-2"
                 />
               </div>
+              <DatePicker
+                placeholder="From date"
+                className="form-control m-2"
+                onChange={(date: any, dateString: string) =>
+                  setValues({ ...values, from: dateString })
+                }
+                disabledDate={(current: any) =>
+                  current.valueOf() < moment().subtract(1, "days")
+                }
+              />
+
+              <DatePicker
+                placeholder="To date"
+                className="form-control m-2"
+                onChange={(date: any, dateString: string) =>
+                  setValues({ ...values, to: dateString })
+                }
+                disabledDate={(current: any) =>
+                  current.valueOf() < moment().subtract(1, "days")
+                }
+              />
               <button className="btn btn-outline-primary m-2">Save</button>
             </form>
           </div>
