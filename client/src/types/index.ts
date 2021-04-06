@@ -92,3 +92,4 @@ export type hotelRegistration = {
   to: string;
   bed: string;
 };
+
