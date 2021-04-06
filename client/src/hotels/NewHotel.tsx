@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { hotelRegistration } from "../types";
 import AlgoliaPlaces from "algolia-places-react";
-import { DatePicker } from "antd";
+import { DatePicker, Select } from "antd";
 import moment from "moment";
+
+const Option = Select;
 
 const NewHotel: React.FC = () => {
   const [values, setValues] = useState<hotelRegistration>({
@@ -101,14 +103,29 @@ const NewHotel: React.FC = () => {
                   value={price}
                   className="form-control m-2"
                 />
-                <input
+
+                <Select
+                  onChange={(value: string) => 
+                    setValues({ ...values, bed: value })
+                  }
+                  className="w-100 m-2"
+                  size="large"
+                  placeholder="Nmber of beds"
+                >
+                  <Option key={1}>{1}</Option>
+                  <Option key={2}>{2}</Option>
+                  <Option key={3}>{3}</Option>
+                  <Option key={4}>{4}</Option>
+                </Select>
+
+                {/* <input
                   type="number"
                   name="bed"
                   onChange={handleChange}
                   placeholder="Number of Beds"
                   value={bed}
                   className="form-control m-2"
-                />
+                /> */}
               </div>
               <DatePicker
                 placeholder="From date"
