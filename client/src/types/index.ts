@@ -97,3 +97,15 @@ export type locationValue = {
     value: string;
   };
 };
+
+export type hotelFormProps = {
+  values: hotelRegistration;
+  location: string;
+  setLocation: React.Dispatch<React.SetStateAction<string>>;
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleSubmit: (e: React.FormEvent) => Promise<void>;
+  setValues: React.Dispatch<React.SetStateAction<hotelRegistration>>;
+};
