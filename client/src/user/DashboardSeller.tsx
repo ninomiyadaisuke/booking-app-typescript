@@ -12,7 +12,7 @@ const DashboardSeller: React.FC = () => {
   const [loading, setLoading] = useState(false);
   const selector = useSelector((state: userAuth) => ({ ...state }));
   const auth = selector.auth;
-  const test: string = "test";
+  const user = auth.user;
 
   const handleClick = async () => {
     setLoading(true);
@@ -78,7 +78,7 @@ const DashboardSeller: React.FC = () => {
       <div className="conatainer p-4">
         <DashboardNav />
       </div>
-      {auth && auth.user && !test ? connected() : notConnected()}
+      {auth && auth.user && auth.user.stripe_seller && auth.user.stripe_seller.charges_enabled ? connected() : notConnected()}
       {/* <pre>{JSON.stringify(auth,null,4)}</pre> */}
     </>
   );

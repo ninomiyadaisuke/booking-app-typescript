@@ -59,12 +59,6 @@ export type userAuth = {
   }
 }
 
-
-
-export type StripeUserAuth = {
-
-}
-
 export type authRoute = {
   exact: boolean
   path: string
@@ -87,3 +81,31 @@ export type bPending = {
 export type balance = {
   pending: [bPending];
 }
+
+export type hotelRegistration = {
+  title: string;
+  content: string;
+  image?: File | null|string;
+  price: string;
+  from: string;
+  to: string;
+  bed: string;
+};
+
+export type locationValue = {
+  suggestion: {
+    value: string;
+  };
+};
+
+export type hotelFormProps = {
+  values: hotelRegistration;
+  location: string;
+  setLocation: React.Dispatch<React.SetStateAction<string>>;
+  handleImageChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  handleChange: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+  handleSubmit: (e: React.FormEvent) => Promise<void>;
+  setValues: React.Dispatch<React.SetStateAction<hotelRegistration>>;
+};
