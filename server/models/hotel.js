@@ -1,7 +1,7 @@
-import mongnoose from "mongoose";
+import mongoose from "mongoose";
 
-const { Schema } = mongnoose;
-const { ObjectId } = mongnoose.Schema;
+const { Schema } = mongoose;
+const { ObjectId } = mongoose.Schema;
 
 const hotelSchema = new Schema(
   {
@@ -27,7 +27,7 @@ const hotelSchema = new Schema(
       ref: "User",
     },
     image: {
-      type: Buffer,
+      data: Buffer,
       contentType: String,
     },
     from: {
@@ -43,4 +43,4 @@ const hotelSchema = new Schema(
   { timestamps: true }
 );
 
-export default mongnoose.model("Hotel", hotelSchema);
+export default mongoose.model("Hotel", hotelSchema);
