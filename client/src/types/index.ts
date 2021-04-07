@@ -109,3 +109,41 @@ export type hotelFormProps = {
   handleSubmit: (e: React.FormEvent) => Promise<void>;
   setValues: React.Dispatch<React.SetStateAction<hotelRegistration>>;
 };
+
+
+export type allHotels = {
+  bed:number
+  content:string
+  createdAt:string
+  from:string
+  image:{
+    contentType:string
+  }
+  location:string
+  price:number
+  title:string
+  to:string
+  updatedAt:string
+  __v:number
+  _id:string
+  __proto__: Object
+}
+
+export type allHotelsProps = {
+  h:allHotels
+}
+
+// {image: {…}, _id: "606d0e65ad02516f649b6dc1", title: "記事内広告", content: "tw", location: "艦砲穴, 知念, 沖縄県, 日本", …}
+// bed: 2
+// content: "tw"
+// createdAt: "2021-04-07T01:44:05.929Z"
+// from: "2021-04-07T00:00:00.000Z"
+// image: {contentType: "image/jpeg"}
+// location: "艦砲穴, 知念, 沖縄県, 日本"
+// price: 1234
+// title: "記事内広告"
+// to: "2021-04-09T00:00:00.000Z"
+// updatedAt: "2021-04-07T01:44:05.929Z"
+// __v: 0
+// _id: "606d0e65ad02516f649b6dc1"
+// __proto__: Object
