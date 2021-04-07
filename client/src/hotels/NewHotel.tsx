@@ -44,12 +44,18 @@ const NewHotel: React.FC = () => {
 
     console.log(...hotelData);
 
-    let res = await createHotel(token, hotelData);
-    console.log("HOTEL CREATE RES", res);
-    toast("New hotel is posted");
-    setTimeout(() => {
-      window.location.reload();
-    }, 1000);
+    try {
+      let res = await createHotel(token, hotelData);
+      console.log("HOTEL CREATE RES", res);
+      toast.success("New hotel is posted");
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    }catch (err){
+      console.log(err);
+      toast.error(err.response.data)
+    }
+    
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {

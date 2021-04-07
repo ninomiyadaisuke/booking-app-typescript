@@ -1,5 +1,6 @@
 import React from "react";
-import { hotelRegistration, locationValue,hotelFormProps } from "../../types";
+import { locationValue, hotelFormProps } from "../../types";
+import { toast } from "react-toastify";
 import AlgoliaPlaces from "algolia-places-react";
 import { DatePicker, Select } from "antd";
 import moment from "moment";
@@ -17,7 +18,7 @@ const HotelCreateForm: React.FC<hotelFormProps> = (props) => {
     setValues,
   } = props;
   const { title, content, price } = values;
-  
+
   return (
     <form onSubmit={handleSubmit}>
       <div className="form-group">
