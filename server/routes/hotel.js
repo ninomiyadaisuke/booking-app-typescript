@@ -1,13 +1,14 @@
 import express from "express";
-import formidable from "express-formidable"
+import formidable from "express-formidable";
 
 const router = express.Router();
 
 import { requireSignin } from "../middlewares";
 
-import { create } from "../controlloers/hotel";
+import { create, hotels,image } from "../controlloers/hotel";
 
-router.post("/create-hotel",requireSignin,formidable(), create);
-
+router.post("/create-hotel", requireSignin, formidable(), create);
+router.get("/hotels", hotels);
+router.get("/hotel/image/:hotelId", image)
 
 module.exports = router;

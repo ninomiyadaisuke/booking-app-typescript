@@ -72,7 +72,7 @@ export type clientToSeverToken = {
 export type bPending = {
   amount: number;
   currency: string;
-  source_types: {
+  source_types?: {
     card: number;
   };
 }
@@ -109,3 +109,26 @@ export type hotelFormProps = {
   handleSubmit: (e: React.FormEvent) => Promise<void>;
   setValues: React.Dispatch<React.SetStateAction<hotelRegistration>>;
 };
+
+
+export type allHotels = {
+  bed:number
+  content:string
+  createdAt:string
+  from:string
+  image:{
+    contentType:string
+  }
+  location:string
+  price:number
+  title:string
+  to:string
+  updatedAt:string
+  __v:number
+  _id:string
+  __proto__: Object
+}
+
+export type allHotelsProps = {
+  h:allHotels
+}

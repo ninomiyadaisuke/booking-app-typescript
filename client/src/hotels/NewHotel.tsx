@@ -32,7 +32,7 @@ const NewHotel: React.FC = () => {
     // console.log(values);
     // console.log(location);
 
-    let hotelData: any = new FormData();
+    let hotelData:any = new FormData();
     hotelData.append("title", title);
     hotelData.append("content", content);
     hotelData.append("location", location);

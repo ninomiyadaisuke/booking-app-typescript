@@ -23,7 +23,7 @@ const ConnectNav: React.FC = () => {
 
   useEffect(() => {
     getAccountBalance(auth.token).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       setBalance(res.data);
     });
   }, []);
