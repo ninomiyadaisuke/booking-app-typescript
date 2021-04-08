@@ -1,13 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { currencyFormatter } from "../../actions/stripe";
 import { allHotelsProps } from "../../types";
+import { diffDays } from "../../actions/hotel";
+import { Link, useHistory } from "react-router-dom";
+import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 
-const SmallCard: React.FC<allHotelsProps> = (props) => {
-  const { h } = props;
-
-  useEffect(() => {
-    console.log(typeof h.price);
-  });
+const SmallCard: React.FC<allHotelsProps> = ({
+  h,
+  // handleHotelDelete = (f) => f,
+}) => {
+  const history = useHistory();
 
   return (
     <div className="card mb-3">
@@ -32,6 +34,34 @@ const SmallCard: React.FC<allHotelsProps> = (props) => {
             </h3>
             <p className="alert alert-info">{h.location}</p>
             <p className="card-text">{`${h.content.substring(1, 200)}...`}</p>
+            <p className="card-text">
+              <span className="float-right text-primary">
+                for {diffDays(h.from, h.to)}{" "}
+                {diffDays(h.from, h.to) <= 1 ? "day" : "days"}
+              </span>
+            </p>
+            <p className="card-text">{h.bed} bed</p>
+            <p className="card-text">
+              Available from {new Date(h.from).toLocaleDateString()}
+            </p>
+
+            <div className="d-flex justify-content-between h4">
+              <button
+                onClick={() => history.push(`/hotel/${h._id}`)}
+                className="btn btn-primary"
+              >
+                Show more
+              </button>
+              <Link to={`/hotel/edit/${h._id}`}>
+                <EditOutlined className="text-warning " />
+              </Link>
+              <Link to={`/hotel/edit/${h._id}`}>
+                <DeleteOutlined
+                  // onClick={() => handleHotelDelete(h._id)}
+                  className="text-danger "
+                />
+              </Link>
+            </div>
           </div>
         </div>
       </div>

@@ -22,7 +22,7 @@ export const getAccountBalance = async (token: string) => axios.post(`${process.
 
 
 export const currencyFormatter = (data:bPending) => {
-  return (data.amount / 100).toLocaleString(data.currency, {
+  return data.amount.toLocaleString(data.currency, {
     style: "currency",
     currency: data.currency,
   })
