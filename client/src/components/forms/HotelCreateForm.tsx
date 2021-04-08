@@ -85,7 +85,7 @@ const HotelCreateForm: React.FC<hotelFormProps> = (props) => {
         onChange={(date: any, dateString: string) =>
           setValues({ ...values, from: dateString })
         }
-        disabledDate={(current: any) =>
+        disabledDate={(current: object) =>
           current.valueOf() < moment().subtract(1, "days")
         }
       />

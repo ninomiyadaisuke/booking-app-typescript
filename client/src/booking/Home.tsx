@@ -22,6 +22,7 @@ const Home: React.FC = () => {
         <h1>All Hotels</h1>
       </div>
       <div className="container-fluid">
+        <br/>
         {/* <pre>{JSON.stringify(hotels,null,4)}</pre> */}
         {hotels.map((h:allHotels, i) => (
           
