@@ -8,25 +8,27 @@ import { EditOutlined, DeleteOutlined } from "@ant-design/icons";
 const SmallCard: React.FC<allHotelsProps> = ({
   h,
   // handleHotelDelete = (f) => f,
+  owner,
+  showViewMoreButton = true,
 }) => {
   const history = useHistory();
-
+  // const owner = false;
   return (
     <div className="card mb-3">
       <div className="row no-gutters">
         <div className="col-md-4">
           {h.image && h.image.contentType ? (
             <img
-            src={`${process.env.REACT_APP_API}/hotel/image/${h._id}`}
-            alt="default hotel image"
-            className="card-image img img-fluid"
-          />
-          ):(
+              src={`${process.env.REACT_APP_API}/hotel/image/${h._id}`}
+              alt="default hotel image"
+              className="card-image img img-fluid"
+            />
+          ) : (
             <img
-            src="https://via.placeholder.com/900x500.png?text=MERN+Booking"
-            alt="default hotel image"
-            className="card-image img img-fluid"
-          />
+              src="https://via.placeholder.com/900x500.png?text=MERN+Booking"
+              alt="default hotel image"
+              className="card-image img img-fluid"
+            />
           )}
         </div>
         <div className="col-md-8">
@@ -54,21 +56,28 @@ const SmallCard: React.FC<allHotelsProps> = ({
             </p>
 
             <div className="d-flex justify-content-between h4">
-              <button
-                onClick={() => history.push(`/hotel/${h._id}`)}
-                className="btn btn-primary"
-              >
-                Show more
-              </button>
-              <Link to={`/hotel/edit/${h._id}`}>
-                <EditOutlined className="text-warning " />
-              </Link>
-              <Link to={`/hotel/edit/${h._id}`}>
-                <DeleteOutlined
-                  // onClick={() => handleHotelDelete(h._id)}
-                  className="text-danger "
-                />
-              </Link>
+              {showViewMoreButton &&(
+                <button
+                  onClick={() => history.push(`/hotel/${h._id}`)}
+                  className="btn btn-primary"
+                >
+                  Show more
+                </button>
+              )}
+
+              {owner && (
+                <>
+                  <Link to={`/hotel/edit/${h._id}`}>
+                    <EditOutlined className="text-warning " />
+                  </Link>
+                  <Link to={`/hotel/edit/${h._id}`}>
+                    <DeleteOutlined
+                      // onClick={() => handleHotelDelete(h._id)}
+                      className="text-danger "
+                    />
+                  </Link>
+                </>
+              )}
             </div>
           </div>
         </div>

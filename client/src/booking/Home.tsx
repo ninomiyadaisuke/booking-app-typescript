@@ -26,7 +26,7 @@ const Home: React.FC = () => {
         {/* <pre>{JSON.stringify(hotels,null,4)}</pre> */}
         {hotels.map((h:allHotels, i) => (
           
-          <SmallCard key={h._id} h={h} />
+          <SmallCard key={h._id} h={h} owner={false} showViewMoreButton={false} />
         ))}
       </div>
     </>

@@ -131,4 +131,6 @@ export type allHotels = {
 
 export type allHotelsProps = {
   h:allHotels
+  owner:boolean
+  showViewMoreButton:boolean
 }
