@@ -14,8 +14,11 @@ export const diffDays = (from: string, to: string) => {
   const end: any = new Date(to)
   const difference = Math.round(Math.abs(start-end) / day)
   console.log(difference);
-
-
-
   return difference
 }
+
+export const sellerHotels = async (token:string) => axios.get(`${process.env.REACT_APP_API}/seller-hotels`, {
+  headers:{
+    Authorization: `Bearer ${token}`
+  }
+})
