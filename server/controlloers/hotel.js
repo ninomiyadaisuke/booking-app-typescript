@@ -37,7 +37,7 @@ export const hotels = async (req, res) => {
     .select("-image.data")
     .populate("postedBy", "_id name")
     .exec();
-  // console.log(all);
+  //console.log(all);
   res.json(all);
 };
 
@@ -54,6 +54,6 @@ export const sellerHotels = async (req, res) => {
     .select("-image.data")
     .populate("postedBy", "_id name")
     .exec();
-  console.log(all);
+  console.log("sellerHotels ===>",all);
   res.send(all);
 };

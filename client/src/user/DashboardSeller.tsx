@@ -8,6 +8,7 @@ import { HomeOutlined } from "@ant-design/icons";
 import { createConnectAccount } from "../actions/stripe";
 import { toast } from "react-toastify";
 import { sellerHotels } from "../actions/hotel";
+import { SmallCard } from "../components/cards";
 
 const DashboardSeller: React.FC = () => {
   const [loading, setLoading] = useState(false);
@@ -50,7 +51,9 @@ const DashboardSeller: React.FC = () => {
           </Link>
         </div>
       </div>
-      <div className="row">{JSON.stringify(hotels)}</div>
+      <div className="row">
+        {hotels.map(h => <SmallCard  h={h} showViewMoreButton={false} owner={true}/>)}
+      </div>
     </div>
   );
 

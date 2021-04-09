@@ -13,7 +13,6 @@ export const diffDays = (from: string, to: string) => {
   const start: any = new Date(from)
   const end: any = new Date(to)
   const difference = Math.round(Math.abs(start-end) / day)
-  console.log(difference);
   return difference
 }
 
