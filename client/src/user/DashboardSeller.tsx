@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { DashboardNav } from "../components";
 import { ConnectNav } from "../components";
 import { Link } from "react-router-dom";
@@ -7,19 +7,31 @@ import { userAuth } from "../types";
 import { HomeOutlined } from "@ant-design/icons";
 import { createConnectAccount } from "../actions/stripe";
 import { toast } from "react-toastify";
+import { sellerHotels } from "../actions/hotel";
+import { SmallCard } from "../components/cards";
 
 const DashboardSeller: React.FC = () => {
   const [loading, setLoading] = useState(false);
+  const [hotels, setHotels] = useState([]);
   const selector = useSelector((state: userAuth) => ({ ...state }));
   const auth = selector.auth;
   const user = auth.user;
+
+  useEffect(() => {
+    loadSellersHotels();
+  }, []);
+
+  const loadSellersHotels = async () => {
+    let { data } = await sellerHotels(auth.token);
+    setHotels(data);
+  };
 
   const handleClick = async () => {
     setLoading(true);
     try {
       let res = await createConnectAccount(auth.token);
       console.log(res);
-      window.location.href = res.data
+      window.location.href = res.data;
     } catch (err) {
       console.log(err);
       toast.error("Stripe connect failed, Try again.");
@@ -38,6 +50,9 @@ const DashboardSeller: React.FC = () => {
             + Add New
           </Link>
         </div>
+      </div>
+      <div className="row">
+        {hotels.map(h => <SmallCard  h={h} showViewMoreButton={false} owner={true}/>)}
       </div>
     </div>
   );
@@ -78,7 +93,12 @@ const DashboardSeller: React.FC = () => {
       <div className="conatainer p-4">
         <DashboardNav />
       </div>
-      {auth && auth.user && auth.user.stripe_seller && auth.user.stripe_seller.charges_enabled ? connected() : notConnected()}
+      {auth &&
+      auth.user &&
+      auth.user.stripe_seller &&
+      auth.user.stripe_seller.charges_enabled
+        ? connected()
+        : notConnected()}
       {/* <pre>{JSON.stringify(auth,null,4)}</pre> */}
     </>
   );
