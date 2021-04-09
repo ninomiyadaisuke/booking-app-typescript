@@ -36,14 +36,23 @@ export const hotels = async (req, res) => {
     .select("-image.data")
     .populate("postedBy", "_id name")
     .exec();
-    // console.log(all);
-    res.json(all)
+  // console.log(all);
+  res.json(all);
 };
 
 export const image = async (req, res) => {
-  let hotel = await Hotel.findById(req.params.hotelId).exec()
-  if (hotel && hotel.image && hotel.image.data !== null){
-    res.set("Content-Type", hotel.image.contentType)
-    return res.send(hotel.image.data)
+  let hotel = await Hotel.findById(req.params.hotelId).exec();
+  if (hotel && hotel.image && hotel.image.data !== null) {
+    res.set("Content-Type", hotel.image.contentType);
+    return res.send(hotel.image.data);
   }
-}
+};
+
+export const sellerHotels = async (req, res) => {
+  let all = await Hotel.find({ postedBy: req.user._id })
+  .select("-image.data")
+  .populate("postedBy", "_id name")
+  .exec()
+
+  res.send(all)
+};
